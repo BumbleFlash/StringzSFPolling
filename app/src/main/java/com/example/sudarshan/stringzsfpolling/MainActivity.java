@@ -11,7 +11,6 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.sudarshan.stringzsfpolling.models.ProgressBarSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -95,7 +94,7 @@ public class MainActivity extends AppCompatActivity {
                     databaseReference.child(auth.getCurrentUser().getUid()).child("College").setValue(collegeName);
                     databaseReference.child(auth.getCurrentUser().getUid()).child("Course").setValue(courseName);
                     //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
-
+                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

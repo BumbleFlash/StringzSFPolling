@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "523975411920",
+    "firebase_url": "https://stringzsfpolling.firebaseio.com",
+    "project_id": "stringzsfpolling",
+    "storage_bucket": "stringzsfpolling.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:523975411920:android:9ac1a9f354a8b34c",
+        "android_client_info": {
+          "package_name": "com.example.sudarshan.stringzsfpolling"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "523975411920-72590eee4523lcna9dq1e3vagcc77pqc.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.sudarshan.stringzsfpolling",
+            "certificate_hash": "dd568a269b8b5f4323baf645e830756c8cd0234d"
+          }
+        },
+        {
+          "client_id": "523975411920-fatt8rbg3lq7dcr7cr4m5v8v2n2au2h7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDJZIgHIFOm90h-LVVWpqm9-2bpvrFvzc8"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 2,
+          "other_platform_oauth_client": [
+            {
+              "client_id": "523975411920-fatt8rbg3lq7dcr7cr4m5v8v2n2au2h7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

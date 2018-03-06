@@ -18,6 +18,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginLeft="8dp"
+            android:textColor="#000"
             android:text="Choose Your Favorite Short Film!"
             android:textSize="32dp"
             android:layout_marginBottom="16dp"/>

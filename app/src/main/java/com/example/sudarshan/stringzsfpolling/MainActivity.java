@@ -95,7 +95,7 @@ public class MainActivity extends AppCompatActivity {
                     databaseReference.child(auth.getCurrentUser().getUid()).child("Course").setValue(courseName);
                     databaseReference.child(auth.getCurrentUser().getUid()).child("hasVoted").setValue(false);
                     //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
-
+                    Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
                 }
             }
         });

@@ -1,5 +1,6 @@
 package com.example.sudarshan.stringzsfpolling;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
@@ -47,6 +48,9 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
+        auth=FirebaseAuth.getInstance();
+        if(auth.getCurrentUser()!=null)
+            startActivity(new Intent(getApplicationContext(),VotingActivity.class));
         databaseReference= FirebaseDatabase.getInstance().getReference("Users");
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -77,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
         final String collegeName = inputCollegeName.getText().toString();
         final String courseName = inputCourseName.getText().toString();
 
-        auth= FirebaseAuth.getInstance();
         auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
             @Override
             public void onComplete(@NonNull Task<AuthResult> task) {
@@ -96,6 +99,7 @@ public class MainActivity extends AppCompatActivity {
                     databaseReference.child(auth.getCurrentUser().getUid()).child("hasVoted").setValue(false);
                     //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
+                    startActivity(new Intent(getApplicationContext(),VotingActivity.class));
                 }
             }
         });

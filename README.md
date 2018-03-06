@@ -1,1 +1,1 @@
-# StringzSFPolling
+# An app for intracultural fest in stringz 2018

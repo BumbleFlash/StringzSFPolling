@@ -1,13 +1,23 @@
 package com.example.sudarshan.stringzsfpolling;
 
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.AppCompatButton;
 import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.sudarshan.stringzsfpolling.models.ProgressBarSettings;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
+import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import butterknife.BindView;
 import butterknife.ButterKnife;
@@ -29,13 +39,16 @@ public class MainActivity extends AppCompatActivity {
     AppCompatButton btnSignup;
     @BindView(R.id.link_login)
     TextView linkLogin;
-
+    @BindView(R.id.progressbar)
+    ProgressBar progressBar;
+    FirebaseAuth auth;
+    DatabaseReference databaseReference;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
-
+        databaseReference= FirebaseDatabase.getInstance().getReference("Users");
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -47,6 +60,8 @@ public class MainActivity extends AppCompatActivity {
     }
     public void signup() {
         Log.d(TAG, "Signup");
+        final String text= btnSignup.getText().toString();
+       // ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,true,text);
 
         if (!validate()) {
             onSignupFailed();
@@ -57,13 +72,33 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-        String name = inputName.getText().toString();
-        String email = inputEmail.getText().toString().trim();
+        final String name = inputName.getText().toString();
+        final String email = inputEmail.getText().toString().trim();
         String password = inputPassword.getText().toString().trim();
-        String collegeName = inputCollegeName.getText().toString();
-        String courseName = inputCourseName.getText().toString();
+        final String collegeName = inputCollegeName.getText().toString();
+        final String courseName = inputCourseName.getText().toString();
 
-        // TODO: Implement your own signup logic here.
+        auth= FirebaseAuth.getInstance();
+        auth.createUserWithEmailAndPassword(email,password).addOnCompleteListener(MainActivity.this, new OnCompleteListener<AuthResult>() {
+            @Override
+            public void onComplete(@NonNull Task<AuthResult> task) {
+                if(!task.isSuccessful()){
+                    Log.d(TAG,task.getException().getMessage());
+                    btnSignup.setEnabled(true);
+                    //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
+
+                }
+                else{
+                    Log.d(TAG, "onComplete: success "+ auth.getCurrentUser().getUid());
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("Name").setValue(name);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("Email").setValue(email);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("College").setValue(collegeName);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("Course").setValue(courseName);
+                    //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
+
+                }
+            }
+        });
 
 
     }

@@ -31,6 +31,16 @@
             android:paddingLeft="5dp" >
 
         </android.support.v7.widget.RecyclerView>
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/no_data_view"
+            android:text="Your opinion has been taken into account, Thank you for voting"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:textSize="20sp"
+            android:visibility="invisible" />
     </LinearLayout>
 
 </android.support.v7.widget.CardView>

@@ -8,7 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
@@ -36,6 +36,8 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_voting);
+
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         databaseReference= FirebaseDatabase.getInstance().getReference("Users");
         recyclerView = findViewById(R.id.recycler_view);
         noDataView = findViewById(R.id.no_data_view);
@@ -107,5 +109,34 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
                     }
                 });
         builder.show();
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()){
+            case android.R.id.home:
+                AlertDialog.Builder builder = new AlertDialog.Builder(
+                        VotingActivity.this);
+                builder.setTitle("Short Film Poll!");
+                builder.setMessage("Do you wish to exit the app?");
+                builder.setPositiveButton("Yes",
+                        new DialogInterface.OnClickListener() {
+                            public void onClick(DialogInterface dialog,
+                                                int which) {
+                               finish();
+
+                            }
+                        });
+                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+
+                    }
+                });
+                builder.show();
+                return false;
+        }
+        return super.onOptionsItemSelected(item);
+
     }
 }

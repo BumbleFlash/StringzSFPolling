@@ -49,8 +49,10 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         auth=FirebaseAuth.getInstance();
-        if(auth.getCurrentUser()!=null)
+        if(auth.getCurrentUser()!=null){
             startActivity(new Intent(getApplicationContext(),VotingActivity.class));
+            finish();
+        }
         databaseReference= FirebaseDatabase.getInstance().getReference("Users");
         btnSignup.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -99,7 +101,10 @@ public class MainActivity extends AppCompatActivity {
                     databaseReference.child(auth.getCurrentUser().getUid()).child("hasVoted").setValue(false);
                     //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
-                    startActivity(new Intent(getApplicationContext(),VotingActivity.class));
+
+                    Intent intent = new Intent(MainActivity.this, VotingActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
             }
         });
@@ -141,5 +146,6 @@ public class MainActivity extends AppCompatActivity {
 
         btnSignup.setEnabled(true);
     }
+
 
 }

@@ -34,7 +34,7 @@
                 android:layout_height="wrap_content"
                 android:hint="Name"
                 android:inputType="textCapWords"
-                android:imeOptions="actionNext"/>
+                android:imeOptions="actionNext" />
         </android.support.design.widget.TextInputLayout>
 
         <!-- Email Label -->
@@ -106,6 +106,7 @@
                 android:layout_marginTop="24dp"
                 android:layout_marginBottom="24dp"
                 android:padding="12dp"
+                android:backgroundTint="#FFC107"
                 android:background="@drawable/round_corner"
                 android:text="Register"/>
             <ProgressBar

@@ -3,13 +3,31 @@ package com.example.sudarshan.stringzsfpolling.models;
 
 
 public class Users {
-    String college;
-    String course;
-    String email;
-    String name;
-    boolean hasVoted;
+    private String college;
+    private String course;
+    private String email;
+    private String name;
+    private boolean hasVoted;
+    private String role;
+    private String link;
 
-    public boolean HasVoted() {
+    public String getLink() {
+        return link;
+    }
+
+    public void setLink(String link) {
+        this.link = link;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
+    }
+
+    public boolean isHasVoted() {
         return hasVoted;
     }
 

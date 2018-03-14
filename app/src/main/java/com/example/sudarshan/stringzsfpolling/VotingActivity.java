@@ -8,6 +8,7 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
@@ -49,7 +50,8 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
             public void onDataChange(DataSnapshot dataSnapshot) {
                 Users users = dataSnapshot.getValue(Users.class);
                 if (users != null) {
-                    if (users.HasVoted()) {
+                    Log.d("Voting", "onDataChange: " + users.isHasVoted() + " " + users.getEmail());
+                    if (users.isHasVoted()) {
                         recyclerView.setVisibility(View.GONE);
                         noDataView.setVisibility(View.VISIBLE);
                     } else {
@@ -100,7 +102,7 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         if(auth.getCurrentUser()!=null) {
-                            databaseReference.child(auth.getCurrentUser().getUid()).child("hasVoted").setValue(true);
+                            databaseReference.child(auth.getCurrentUser().getUid()).child("isHasVoted").setValue(true);
                             databaseReference.child(auth.getCurrentUser().getUid()).child("votedTo").setValue(shortFilms[position]);
                             databaseReference1.child("votemovie" + (position + 1)).setValue(votes[position] + 1);
                             layout.setBackgroundColor(Color.parseColor("#009688"));
@@ -113,7 +115,7 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-        switch (item.getItemId()){
+        switch (item.getItemId()) {
             case android.R.id.home:
                 AlertDialog.Builder builder = new AlertDialog.Builder(
                         VotingActivity.this);
@@ -123,7 +125,7 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
                         new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog,
                                                 int which) {
-                               finish();
+                                finish();
 
                             }
                         });

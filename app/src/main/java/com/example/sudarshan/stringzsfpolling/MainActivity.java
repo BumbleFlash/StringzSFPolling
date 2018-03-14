@@ -12,6 +12,7 @@ import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.sudarshan.stringzsfpolling.utils.ProgressBarSettings;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
@@ -49,8 +50,8 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
         ButterKnife.bind(this);
         auth=FirebaseAuth.getInstance();
-        if(auth.getCurrentUser()!=null){
-            startActivity(new Intent(getApplicationContext(),VotingActivity.class));
+        if (auth.getCurrentUser() != null) {
+            startActivity(new Intent(getApplicationContext(), ChoiceActivity.class));
             finish();
         }
         databaseReference= FirebaseDatabase.getInstance().getReference("Users");
@@ -66,7 +67,7 @@ public class MainActivity extends AppCompatActivity {
     public void signup() {
         Log.d(TAG, "Signup");
         final String text= btnSignup.getText().toString();
-       // ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,true,text);
+        ProgressBarSettings.showProgressBarOnButton(btnSignup, progressBar, getApplicationContext(), android.R.color.white, true, text);
 
         if (!validate()) {
             onSignupFailed();
@@ -89,20 +90,21 @@ public class MainActivity extends AppCompatActivity {
                 if(!task.isSuccessful()){
                     Log.d(TAG,task.getException().getMessage());
                     btnSignup.setEnabled(true);
-                    //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
+                    ProgressBarSettings.showProgressBarOnButton(btnSignup, progressBar, getApplicationContext(), android.R.color.white, false, text);
 
                 }
                 else{
                     Log.d(TAG, "onComplete: success "+ auth.getCurrentUser().getUid());
-                    databaseReference.child(auth.getCurrentUser().getUid()).child("Name").setValue(name);
-                    databaseReference.child(auth.getCurrentUser().getUid()).child("Email").setValue(email);
-                    databaseReference.child(auth.getCurrentUser().getUid()).child("College").setValue(collegeName);
-                    databaseReference.child(auth.getCurrentUser().getUid()).child("Course").setValue(courseName);
-                    databaseReference.child(auth.getCurrentUser().getUid()).child("hasVoted").setValue(false);
-                    //ProgressBarSettings.showProgressBarOnButton(btnSignup,progressBar,getApplicationContext(),android.R.color.white,false,text);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("name").setValue(name);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("email").setValue(email);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("college").setValue(collegeName);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("course").setValue(courseName);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("isHasVoted").setValue(false);
+                    databaseReference.child(auth.getCurrentUser().getUid()).child("role").setValue("voter");
+                    ProgressBarSettings.showProgressBarOnButton(btnSignup, progressBar, getApplicationContext(), android.R.color.white, false, text);
                     Toast.makeText(getApplicationContext(), "Registration successful!", Toast.LENGTH_SHORT).show();
 
-                    Intent intent = new Intent(MainActivity.this, VotingActivity.class);
+                    Intent intent = new Intent(MainActivity.this, ChoiceActivity.class);
                     startActivity(intent);
                     finish();
                 }

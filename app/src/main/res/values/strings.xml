@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">StringzSFPolling</string>
+    <string name="send_link">Send Link</string>
+    <string name="paste_link_hint">Paste your link here</string>
 </resources>

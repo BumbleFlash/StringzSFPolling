@@ -142,4 +142,10 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
         return super.onOptionsItemSelected(item);
 
     }
+
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+
+    }
 }

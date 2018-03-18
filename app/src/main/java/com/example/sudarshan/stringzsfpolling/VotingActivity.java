@@ -102,9 +102,10 @@ public class VotingActivity extends AppCompatActivity implements ShortFilmAdapte
                     public void onClick(DialogInterface dialog,
                                         int which) {
                         if(auth.getCurrentUser()!=null) {
-                            databaseReference.child(auth.getCurrentUser().getUid()).child("isHasVoted").setValue(true);
+                            databaseReference.child(auth.getCurrentUser().getUid()).child("hasVoted").setValue(true);
                             databaseReference.child(auth.getCurrentUser().getUid()).child("votedTo").setValue(shortFilms[position]);
-                            databaseReference1.child("votemovie" + (position + 1)).setValue(votes[position] + 1);
+                            if (position <= 2)
+                                databaseReference1.child("votemovie" + (position + 1)).setValue(votes[position] + 1);
                             layout.setBackgroundColor(Color.parseColor("#009688"));
                         }
 

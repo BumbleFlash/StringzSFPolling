@@ -10,6 +10,33 @@ public class Users {
     private boolean hasVoted;
     private String role;
     private String link;
+    private String representative;
+    private String phone;
+    private String theme;
+
+    public String getRepresentative() {
+        return representative;
+    }
+
+    public void setRepresentative(String representative) {
+        this.representative = representative;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme;
+    }
 
     public String getLink() {
         return link;

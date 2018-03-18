@@ -23,6 +23,7 @@
         <TextView
             android:layout_width="wrap_content"
             android:padding="16dp"
+            android:id="@+id/participate_card_text"
             android:layout_height="wrap_content"
             android:textSize="26sp"
             android:textColor="@color/colorAccent"
@@ -48,9 +49,10 @@
             android:layout_width="wrap_content"
             android:padding="16dp"
             android:textSize="26sp"
+            android:id="@+id/vote_card_text"
             android:textColor="@color/colorAccent"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
+            android:layout_gravity="center"
             android:text="Cast your vote" />
 
     </android.support.v7.widget.CardView>
